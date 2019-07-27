@@ -28,12 +28,25 @@ for root, dirs, files in os.walk(startpath):
 			if any([len(ext)>4, ext != ex]):continue
 		except:continue
 		fullpaths.append(path)
-		cprint(path, "fo", speed=0.0001, newline=True)
+		cprint(path, "s", speed=0.0000000000000000000000000000000009, newline=True, warningOn=False)
 	if not treeMode:break
+
 if len(fullpaths) ==0:
 	cprint("couldn't find this extention!")
 	time.sleep(3)
 	sys.exit()
+
+#################################STATS CONDITIONS###########################################################
+cprint("i found all your files, senpai!!, press a key to show stats: ", newline=True)
+input()
+os.system("cls")
+cprint("(STATS)".center(34, "*"), newline=True)
+cprint(f"the target extention: ".ljust(30, " ") + f"{ex}".rjust(4, " "), newline=True)
+cprint(f"the number of files found: ".ljust(30, " ") + f"{str(len(fullpaths))}".rjust(4, " "), newline=True)
+cprint("(press enter to proceed)".center(34, "*"), newline=True)
+input()
+#############################################################################################################
+
 cprint("press (y) if you want to proceed and remove all: ", newline=True)
 ans = input()
 if ans == "y":
@@ -41,3 +54,6 @@ if ans == "y":
 		#path = os.path.join(os.getcwd(), i)
 		cprint("removing "+os.path.basename(p), speed=0.01/99, newline=True)
 		os.remove(p)
+
+
+
