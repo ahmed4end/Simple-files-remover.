@@ -1,16 +1,13 @@
 import os, sys, time
 from glob import glob 
 from shutil import rmtree
-from pprint import pprint
 try:
 	from cprint import cprint
-	from pprint import pprint
 except:
 	print("this script will be ugly cuz you don't have the cprint&pprint libraries xD")
 	def bprint(txt, *args, speed=1/99, newline=True):
 		print(txt)
 	cprint = bprint
-	pprint = print
 
 
 cprint("Enter (t) to select 'Tree mode' or continue on the current directory: ", "fow")
