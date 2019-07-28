@@ -8,10 +8,13 @@ class cprint():
 			
 	#i know it's crazy using oop this way, but i don't really care, this is the way i opertate xD
 	"""
-	def __init__(self,text , style='r', speed=1/99,cmd_color="A", newline=False, warningOn=True):
-		if newline:print()
-		os.system("color "+cmd_color)
+	def __init__(self,text , style='r', speed=1/99,cmd_color="A", newline=False, warningOn=True, robotOn=False):
+		if newline:print()            # newline 
+		os.system("color "+cmd_color) #cmd_color
 		self.letters = [chr(i) for  i in range(65, 123)] + ["@", "#", "$", "%", "^", "&", "*", "~"] #Editable! 
+		if robotOn:
+			warningOn = False
+			text = text[:30]+ "..." + text[-30:] #robotOn : this force the the text to be under 75 letters so funcs work fine.
 		if len(text) > 75 and warningOn: #Warning!
 			self.dprint("WARNING: your text must be less than 75 letters! or shit happens.")
 			print("\n")
