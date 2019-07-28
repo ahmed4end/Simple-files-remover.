@@ -5,13 +5,14 @@ try:
 	from cprint import cprint
 except:
 	print("this script will be ugly cuz you don't have the cprint&pprint libraries xD")
-	def bprint(txt, *args, speed=1/99, newline=True):
+	def bprint(txt, *args, speed=1/99, newline=True, robotOn=True, warningOn=True):
 		print(txt)
 	cprint = bprint
 
 
 cprint("Enter (t) to select 'Tree mode' or continue on the current directory: ", "fow")
 ans = input()
+os.system("cls")
 treeMode = True if ans == "t" else False
 startpath, fullpaths =os.getcwd(), []
 cprint("Enter extention you want to remove: ")
@@ -28,7 +29,7 @@ for root, dirs, files in os.walk(startpath):
 			if any([len(ext)>4, ext != ex]):continue
 		except:continue
 		fullpaths.append(path)
-		cprint(path, "s", speed=0.0000000000000000000000000000000009, newline=True, warningOn=False)
+		cprint(path, "s", speed=0.0000000000000000000000000000000009, newline=True, robotOn=True)
 	if not treeMode:break
 
 if len(fullpaths) ==0:
@@ -37,6 +38,7 @@ if len(fullpaths) ==0:
 	sys.exit()
 
 #################################STATS CONDITIONS###########################################################
+print()
 cprint("i found all your files, senpai!!, press a key to show stats: ", newline=True)
 input()
 os.system("cls")
