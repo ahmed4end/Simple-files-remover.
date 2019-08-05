@@ -1,6 +1,6 @@
 import random, sys, time, os
 
-text = "Hello, Human!, this message should be printed in a cool way xD: "
+#take a look down here, there is an example should help.
 
 class cprint():
 	"""
@@ -8,13 +8,16 @@ class cprint():
 			
 	#i know it's crazy using oop this way, but i don't really care, this is the way i opertate xD
 	"""
-	def __init__(self,text , style='r', speed=1/99,cmd_color="A", newline=False, warningOn=True, robotOn=False):
-		if newline:print()            # newline 
+	def __init__(self,text , style='r', speed=1/99,cmd_color="A", newline=False, warningOn=False, robotOn=False, freeze=False, normal=False):
+		if newline:print()            # newline
 		os.system("color "+cmd_color) #cmd_color
 		self.letters = [chr(i) for  i in range(65, 123)] + ["@", "#", "$", "%", "^", "&", "*", "~"] #Editable! 
-		if robotOn:
+		if robotOn and len(text)>75:
 			warningOn = False
 			text = text[:30]+ "..." + text[-30:] #robotOn : this force the the text to be under 75 letters so funcs work fine.
+		if normal:
+			print(text)
+			return None
 		if len(text) > 75 and warningOn: #Warning!
 			self.dprint("WARNING: your text must be less than 75 letters! or shit happens.")
 			print("\n")
@@ -34,14 +37,16 @@ class cprint():
 			"rs": "self.rsprint(text, speed)",	 #Reverse #Slow printing
 			"m": "self.mprint(text, speed)",     #Middle printing
 			"rm": "self.rmprint(text, speed)",	 #reverse #Middle printing
-			"r": 'eval(categories[random.choice(["d", "fo", "fow", "sd", "rsd", "t", "rt", "s", "rs", "m", "rm"])])'
+			"u": "self.uprint(text, speed)",	 #upper casing slow printing
+			"r": 'eval(categories[random.choice(["d", "fo", "fow", "sd", "rsd", "t", "rt", "s", "rs", "m", "rm", "u"])])'
 		}
 		self.memory = [999,999999]
 		try:
 			eval(categories[style])
 		except:
 			print("invalid Choice")
-
+		if freeze: #this makes printing freezes for any input after printing!
+			input()
 	def dprint(self, text, speed=1/99): 
 		#Full name: Distortion printing
 		res = [text]
@@ -141,7 +146,17 @@ class cprint():
 		seq, re_seq = [text[0:i] for i in range(1, len(text)//2+1)], [text[-i:] for i in range(1, len(text)//2+1)]
 		seq, pattern = zip(seq, re_seq), "i + ' '*(" + str(len(text)) + "-len(i)*2) + j"
 		self.Core(seq, pattern, speed)
-
+	def uprint(self, text, speed=1/99):
+		seq = [text]
+		text, last = list(text), text.upper()
+		for i in range(len(text)+5):
+			for _ in range(random.randint(0, 6)):
+				index = random.randint(0, len(text)-1)
+				text[index] = text[index].upper()
+			seq.append("".join(text))
+		seq.append(last)
+		seq = seq+ seq[::-1]
+		self.Core(seq, "i", speed, False)
 	def Core(self, seq, pattern, speed, double=True):
 		if double:
 			for i, j in seq:
@@ -159,10 +174,11 @@ class cprint():
 if __name__ == "__main__":
 	
 	########### Test ###########
-	
+	text = "Hello, Human!, this message should be printed in a cool way xD: "
 	cprint(text)            #Random printing style  
-	print("\n") #Do work here instead
-	styles=["d", "fo", "fow", "sd", "rsd", "t", "rt", "s", "rs", "m", "rm"]
+	print("\n")             #Do work here instead
+	styles=["d", "fo", "fow", "sd", "rsd", "t", "rt", "s", "rs", "m", "rm", "u"]
 	for  i in styles:
 		cprint(text, style=i)
-		print("\n") #Do work here instead
+		print("\n")         #Do work here instead
+	input()
