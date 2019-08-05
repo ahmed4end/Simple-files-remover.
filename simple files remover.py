@@ -5,7 +5,7 @@ try:
 	from cprint import cprint
 except:
 	print("this script will be ugly cuz you don't have the cprint&pprint libraries xD")
-	def bprint(txt, *args, speed=1/99, newline=True, robotOn=True, warningOn=True):
+	def bprint(txt, *args, speed=1/99, newline=True, robotOn=True, warningOn=True, normal=True):
 		print(txt)
 	cprint = bprint
 
@@ -15,9 +15,9 @@ ans = input()
 os.system("cls")
 treeMode = True if ans == "t" else False
 startpath, fullpaths =os.getcwd(), []
-cprint("Enter extention you want to remove: ")
-ex = input()
-if len(ex) < 2:
+cprint("Enter extentions you want to remove: ")
+ex = input().split(" ")
+if all([len(i) < 2 for i in ex]):
 	cprint("invalid extention senpai!")
 	time.sleep(5)
 	sys.exit()
@@ -26,10 +26,10 @@ for root, dirs, files in os.walk(startpath):
 		try:
 			path = str(os.path.join(root, f))
 			ext = str(os.path.join(root, f))[::-1].split(".")[0][::-1]
-			if any([len(ext)>4, ext != ex]):continue
+			if any([len(ext)>4, ext not in ex]):continue
 		except:continue
 		fullpaths.append(path)
-		cprint(path, "s", speed=0.0000000000000000000000000000000009, newline=True, robotOn=True)
+		cprint(path, "s", speed=0.00000000000000000000000009, newline=False, robotOn=True, normal=True)
 	if not treeMode:break
 
 if len(fullpaths) ==0:
@@ -53,9 +53,6 @@ cprint("press (y) if you want to proceed and remove all: ", newline=True)
 ans = input()
 if ans == "y":
 	for p in fullpaths:
-		#path = os.path.join(os.getcwd(), i)
 		cprint("removing "+os.path.basename(p), speed=0.01/99, newline=True)
 		os.remove(p)
-
-
 
